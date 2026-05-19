@@ -29,6 +29,6 @@
 ### Запуск
 
 ```bash
-git clone <url-репозитория>
-cd <папка-проекта>
+git clone https://github.com/DenisNikolsky/Test_project_for_backend
+cd Test_project_for_backend
 docker-compose up --build
