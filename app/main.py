@@ -15,7 +15,6 @@ async def init_db():
 
 @app.post("/devices/{device_id}/data", response_model=schemas.DataPointResponse)
 async def add_data_point(device_id: str, payload: schemas.DataPointCreate, db: AsyncSession = Depends(get_async_db)):
-    # auto-create device if not exists
     await crud.get_or_create_device(db, device_id)
     point = await crud.create_data_point(db, device_id, payload.x, payload.y, payload.z)
     return point
@@ -39,7 +38,6 @@ async def get_task_result(task_id: str):
         return task.result
     return {"status": "pending", "task_id": task_id}
 
-# User management
 @app.post("/users", response_model=schemas.UserResponse)
 async def create_user(user: schemas.UserCreate, db: AsyncSession = Depends(get_async_db)):
     return await crud.create_user(db, user.name)
